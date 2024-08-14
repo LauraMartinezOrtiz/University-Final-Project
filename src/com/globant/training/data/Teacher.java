@@ -1,4 +1,4 @@
-package src.data;
+package src.com.globant.training.data;
 
 public abstract class Teacher extends Person {
 
