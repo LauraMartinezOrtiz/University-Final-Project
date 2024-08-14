@@ -1,4 +1,4 @@
-package src.com.globant.training.data;
+package src.com.globant.training.model;
 
 public class Student extends Person {
 
@@ -26,4 +26,5 @@ public class Student extends Person {
     public void setAge(int age) {
         this.age = age;
     }
+
 }

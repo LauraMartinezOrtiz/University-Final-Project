@@ -1,4 +1,4 @@
-package src.com.globant.training.data;
+package src.com.globant.training.model;
 
 public class Person {
 
