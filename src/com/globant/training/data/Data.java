@@ -32,8 +32,6 @@ public class Data {
         classes.add(new Subject("Web advanced", "203L", students.subList(2,5), teachers.get(4)));
         classes.add(new Subject("Discrete math", "305A", students.subList(3,5), teachers.get(5)));
         classes.add(new Subject("Software architecture", "102B", students.subList(0,5), teachers.get(3)));
-
-
     }
 
     public List<Teacher> getTeachers() {

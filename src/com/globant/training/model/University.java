@@ -1,5 +1,6 @@
 package src.com.globant.training.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class University {
@@ -80,5 +81,49 @@ public class University {
                 subject.getStudents().add(student);
             }
         }
+    }
+
+    private Student searchStudentById(long id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    private Teacher searchTeacherByName(String name) {
+        for (Teacher teacher : teachers) {
+            if (teacher.getName().equalsIgnoreCase(name)) {
+                return teacher;
+            }
+        }
+        return null;
+    }
+
+    public StringBuilder getSubjectForStudent(long studentId) {
+        StringBuilder info = new StringBuilder();
+        Student student = searchStudentById(studentId);
+
+        for (Subject subject : subjects) {
+            if (subject.getStudents().contains(student)) {
+                info.append("\n").append(subject.getName());
+            }
+        }
+        return info;
+    }
+
+
+    public String createSubject(String subjectName, String classroom, long studentId, String teacherName) {
+        Student newStudent = searchStudentById(studentId);
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(newStudent);
+
+        Teacher newTeacher = searchTeacherByName(teacherName);
+
+        Subject subject = new Subject(subjectName, classroom, studentList, newTeacher);
+        subjects.add(subject);
+
+        return subject.toString();
     }
 }

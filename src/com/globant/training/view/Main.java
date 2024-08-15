@@ -14,7 +14,7 @@ public class Main {
         //showOptions();
         data.setInitialData();
         university = new University(data.getTeachers(), data.getStudents(), data.getClasses());
-        addStudent();
+        listClassesOfStudent();
     }
 
 
@@ -73,14 +73,40 @@ public class Main {
         long id = scanner.nextLong();
         scanner = new Scanner(System.in);
 
-        System.out.println("Enter the name of a class in which th student will be added: ");
+        System.out.println("Enter the name of the class in which the student will be added: ");
         String subjectName = scanner.nextLine();
         scanner = new Scanner(System.in);
 
         university.enrollStudent(subjectName, name, age, id);
         System.out.println(university.showSubject(subjectName));
-
     }
 
+    public static void addSubject() {
+        System.out.println("Enter the name of the new subject: ");
+        String name = scanner.nextLine();
+        scanner = new Scanner(System.in);
 
+        System.out.println("Enter the classroom: ");
+        String classroom = scanner.nextLine();
+        scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID of the student: ");
+        long id = scanner.nextLong();
+        scanner = new Scanner(System.in);
+
+        System.out.println("Enter the name of the teacher of this subject: ");
+        String teacherName = scanner.nextLine();
+        scanner = new Scanner(System.in);
+
+        System.out.println("New class added successfully: \n" + university.createSubject(name, classroom, id, teacherName));
+    }
+
+    public static void listClassesOfStudent(){
+        System.out.println("Enter the ID of the student: ");
+        long id = scanner.nextLong();
+        scanner = new Scanner(System.in);
+
+        System.out.println("The student is included in the following subjects:" + university.getSubjectForStudent(id));
+    }
 }
+
