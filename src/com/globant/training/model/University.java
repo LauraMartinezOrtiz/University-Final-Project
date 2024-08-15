@@ -57,24 +57,19 @@ public class University {
 
     public StringBuilder showSubject(String subjectName) {
         StringBuilder info = new StringBuilder();
-        boolean found = false;
 
         for (Subject subject : subjects) {
             if (subject.getName().equalsIgnoreCase(subjectName)) {
                 info.append("\n").append(subject);
-                found = true;
                 break;
             }
-        }
-        if (!found) {
-            info.append("That class doesn't exist. Please try again.");
         }
         return info;
     }
 
     public void enrollStudent(String subjectName, String name, int age, long id) {
         Student student = new Student(name, age, id);
-
+        students.add(student);
         for (Subject subject : subjects) {
             if (subject.getName().equalsIgnoreCase(subjectName)) {
                 subject.getStudents().add(student);
@@ -82,7 +77,7 @@ public class University {
         }
     }
 
-    private Student searchStudentById(long id) {
+    public Student searchStudentById(long id) {
         for (Student student : students) {
             if (student.getId() == id) {
                 return student;
@@ -91,10 +86,19 @@ public class University {
         return null;
     }
 
-    private Teacher searchTeacherByName(String name) {
+    public Teacher searchTeacherByName(String name) {
         for (Teacher teacher : teachers) {
             if (teacher.getName().equalsIgnoreCase(name)) {
                 return teacher;
+            }
+        }
+        return null;
+    }
+
+    public Subject searchSubjectByName(String name){
+        for (Subject subject : subjects) {
+            if (subject.getName().equalsIgnoreCase(name)) {
+                return subject;
             }
         }
         return null;

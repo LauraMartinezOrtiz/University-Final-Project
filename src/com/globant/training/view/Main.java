@@ -34,14 +34,14 @@ public class Main {
 
 
     public static void showMenu() {
-        System.out.print( "------------------------------------------------ \n" +
+        System.out.print("------------------------------------------------ \n" +
                 "Please enter the number of the option that you want:\n" +
                 "1. Print all the professors with their data  \n"
-                        + "2. Print all the classes \n"
-                        + "3. Create a new student and add it to an existing subject \n"
-                        + "4. Create a new subject \n"
-                        + "5. Search a student and list all their classes \n"
-                        + "6. Exit \n"
+                + "2. Print all the classes \n"
+                + "3. Create a new student and add it to an existing subject \n"
+                + "4. Create a new subject \n"
+                + "5. Search a student and list all their classes \n"
+                + "6. Exit \n"
         );
     }
 
@@ -103,13 +103,15 @@ public class Main {
         String subjectName = scanner.nextLine();
         scanner = new Scanner(System.in);
 
+        while (university.searchSubjectByName(subjectName) == null) {
+            System.out.println("There's no subject with that name. Try again.");
+            subjectName = scanner.nextLine();
+            scanner = new Scanner(System.in);
+        }
+
         university.enrollStudent(subjectName, name, age, id);
         StringBuilder subjectInfo = university.showSubject(subjectName);
-        if (subjectInfo != null) {
-            System.out.println(subjectInfo);
-        } else {
-            System.out.println("Subject not found or student not enrolled.");
-        }
+        System.out.println("The student " + name + " was added successfully" + subjectInfo);
     }
 
     public static void addSubject() {
@@ -125,17 +127,34 @@ public class Main {
         long id = scanner.nextLong();
         scanner = new Scanner(System.in);
 
+        while (university.searchStudentById(id) == null) {
+            System.out.println("There's no student with that ID. Try again.");
+            id = scanner.nextLong();
+            scanner = new Scanner(System.in);
+        }
+
         System.out.println("Enter the name of the teacher of this subject: ");
         String teacherName = scanner.nextLine();
-        scanner = new Scanner(System.in);
+
+        while (university.searchTeacherByName(teacherName) == null) {
+            System.out.println("There's no teacher with that name. Try again.");
+            teacherName = scanner.nextLine();
+            scanner = new Scanner(System.in);
+        }
 
         System.out.println("New class added successfully: \n" + university.createSubject(name, classroom, id, teacherName));
     }
 
+
     public static void listClassesOfStudent() {
         System.out.println("Enter the ID of the student: ");
         long id = scanner.nextLong();
-        scanner = new Scanner(System.in);
+
+        while (university.searchStudentById(id) == null) {
+            System.out.println("There's no student with that ID. Try again.");
+            id = scanner.nextLong();
+            scanner = new Scanner(System.in);
+        }
 
         System.out.println("The student is included in the following subjects:" + university.getSubjectForStudent(id));
     }
