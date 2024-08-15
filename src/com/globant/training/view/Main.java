@@ -1,8 +1,6 @@
 package src.com.globant.training.view;
 
 import src.com.globant.training.data.Data;
-import src.com.globant.training.model.Subject;
-import src.com.globant.training.model.Student;
 import src.com.globant.training.model.University;
 
 import java.util.Scanner;
@@ -16,7 +14,7 @@ public class Main {
         //showOptions();
         data.setInitialData();
         university = new University(data.getTeachers(), data.getStudents(), data.getClasses());
-        showClasses();
+        addStudent();
     }
 
 
@@ -39,8 +37,6 @@ public class Main {
                 break;
             case 2:
                 showClasses();
-                //submenu to select a class in order to print the class data including its
-                //teacher and students
                 break;
             case 3:
                 break;
@@ -60,18 +56,31 @@ public class Main {
     public static void classesSubmenu() {
         System.out.println("Enter the name of a class in order to print the class data: ");
         String name = scanner.nextLine();
-
-        System.out.println("Details of subject: " + university.checkClassExists(name));
-        /*if ()
-        System.out.println("That class doesn't exist. Try again");
-        classesSubmenu();*/
+        scanner = new Scanner(System.in);
+        System.out.println("Details of subject: " + university.showSubject(name));
     }
 
-    //public void enrollStudent(Subject subject, Student student) {
-    // if (university.checkClassExists(subject)) {
-    //university.enrollClass(student);
-    //  }
-    //}
+    public static void addStudent() {
+        System.out.println("Enter the name of the student: ");
+        String name = scanner.nextLine();
+        scanner = new Scanner(System.in);
+
+        System.out.println("Enter the age of the student: ");
+        int age = scanner.nextInt();
+        scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID of the student: ");
+        long id = scanner.nextLong();
+        scanner = new Scanner(System.in);
+
+        System.out.println("Enter the name of a class in which th student will be added: ");
+        String subjectName = scanner.nextLine();
+        scanner = new Scanner(System.in);
+
+        university.enrollStudent(subjectName, name, age, id);
+        System.out.println(university.showSubject(subjectName));
+
+    }
 
 
 }

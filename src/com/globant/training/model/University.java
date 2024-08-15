@@ -38,11 +38,6 @@ public class University {
         this.teachers = teachers;
     }
 
-
-    public void enrollClass(Student student) {
-        students.add(student);
-    }
-
     public StringBuilder showTeacher() {
         StringBuilder info = new StringBuilder();
         for (Teacher teacher : teachers) {
@@ -61,7 +56,7 @@ public class University {
         return info;
     }
 
-    public StringBuilder checkClassExists(String subjectName) {
+    public StringBuilder showSubject(String subjectName) {
         StringBuilder info = new StringBuilder();
         boolean found = false;
 
@@ -72,11 +67,18 @@ public class University {
                 break;
             }
         }
-
         if (!found) {
-            info.append("That class doesn't exist. Try again");
+            info.append("That class doesn't exist. Please try again.");
         }
-
         return info;
+    }
+
+    public void enrollStudent(String subjectName, String name, int age, long id) {
+        Student student = new Student(name, age, id);
+        for (Subject subject : subjects) {
+            if (subject.getName().equalsIgnoreCase(subjectName)) {
+                subject.getStudents().add(student);
+            }
+        }
     }
 }

@@ -45,7 +45,7 @@ public class Subject {
     public String toString() {
         return "Class name: " + getName() +
                 " - Classroom: " + getClassroom() +
-                " - Students: " + getStudents() +
+                " - Students: " + getStudents().toString() +
                 " - Teacher: " + getTeacher().getName();
     }
 }

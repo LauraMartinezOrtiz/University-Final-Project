@@ -27,4 +27,10 @@ public class Student extends Person {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "Student name: " + getName() +
+                " - ID: " + getId() +
+                " - Age: " + getAge();
+    }
 }

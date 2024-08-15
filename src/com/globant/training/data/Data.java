@@ -28,10 +28,10 @@ public class Data {
         students.add(new Student("Nicolas Vega", 22, 33022366));
 
 
-        classes.add(new Subject("Data structures", "204M", students, teachers.get(1)));
-        classes.add(new Subject("Web advanced", "203L", students, teachers.get(4)));
-        classes.add(new Subject("Discrete math", "305A", students, teachers.get(5)));
-        classes.add(new Subject("Software architecture", "102B", students, teachers.get(3)));
+        classes.add(new Subject("Data structures", "204M", students.subList(0,2), teachers.get(1)));
+        classes.add(new Subject("Web advanced", "203L", students.subList(2,5), teachers.get(4)));
+        classes.add(new Subject("Discrete math", "305A", students.subList(3,5), teachers.get(5)));
+        classes.add(new Subject("Software architecture", "102B", students.subList(0,5), teachers.get(3)));
 
 
     }
