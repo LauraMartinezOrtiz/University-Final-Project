@@ -83,6 +83,11 @@ public class Main {
         System.out.println("Enter the name of a subject in order to print the subject's information: ");
         String name = scanner.nextLine();
         scanner = new Scanner(System.in);
+        while (university.searchSubjectByName(name) == null) {
+            System.out.println("There's no subject with that name. Try again.");
+            name = scanner.nextLine();
+            scanner = new Scanner(System.in);
+        }
         System.out.println("Details of subject: " + university.showSubject(name));
     }
 
