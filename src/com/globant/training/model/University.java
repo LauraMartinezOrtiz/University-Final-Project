@@ -49,10 +49,8 @@ public class University {
 
     public StringBuilder showAllClasses() {
         StringBuilder info = new StringBuilder();
-        int counter = 1;
         for (Subject subject : subjects) {
-            info.append(counter).append(". ").append(subject.getName()).append("\n");
-            counter++;
+            info.append(" - ").append(subject.getName()).append("\n");
         }
         return info;
     }
@@ -76,6 +74,7 @@ public class University {
 
     public void enrollStudent(String subjectName, String name, int age, long id) {
         Student student = new Student(name, age, id);
+
         for (Subject subject : subjects) {
             if (subject.getName().equalsIgnoreCase(subjectName)) {
                 subject.getStudents().add(student);
@@ -112,7 +111,6 @@ public class University {
         }
         return info;
     }
-
 
     public String createSubject(String subjectName, String classroom, long studentId, String teacherName) {
         Student newStudent = searchStudentById(studentId);

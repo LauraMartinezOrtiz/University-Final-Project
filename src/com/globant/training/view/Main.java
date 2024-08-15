@@ -3,6 +3,7 @@ package src.com.globant.training.view;
 import src.com.globant.training.data.Data;
 import src.com.globant.training.model.University;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -11,27 +12,41 @@ public class Main {
     private static University university;
 
     public static void main(String[] args) {
-        //showOptions();
         data.setInitialData();
         university = new University(data.getTeachers(), data.getStudents(), data.getClasses());
-        listClassesOfStudent();
+        start();
+    }
+
+    public static void start() {
+        int option;
+        try {
+            do {
+                showMenu();
+                option = scanner.nextInt();
+                scanner = new Scanner(System.in);
+                operations(option);
+
+            } while (option != 6);
+        } catch (InputMismatchException exception) {
+            System.out.println("Enter a number for your choice");
+        }
     }
 
 
-    public static void showOptions() {
-        System.out.print(
+    public static void showMenu() {
+        System.out.print( "------------------------------------------------ \n" +
+                "Please enter the number of the option that you want:\n" +
                 "1. Print all the professors with their data  \n"
                         + "2. Print all the classes \n"
-                        + "3. Create a new student and add it to an existing class \n"
-                        + "4. Create a new class \n"
+                        + "3. Create a new student and add it to an existing subject \n"
+                        + "4. Create a new subject \n"
                         + "5. Search a student and list all their classes \n"
-                        + "6. Exit"
+                        + "6. Exit \n"
         );
+    }
 
-        int selection = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (selection) {
+    public static void operations(int choice) {
+        switch (choice) {
             case 1:
                 showTeachers();
                 break;
@@ -39,8 +54,19 @@ public class Main {
                 showClasses();
                 break;
             case 3:
+                addStudent();
+                break;
+            case 4:
+                addSubject();
+                break;
+            case 5:
+                listClassesOfStudent();
+                break;
+            case 6:
                 break;
             default:
+                System.out.println("Try again");
+                break;
         }
     }
 
@@ -54,7 +80,7 @@ public class Main {
     }
 
     public static void classesSubmenu() {
-        System.out.println("Enter the name of a class in order to print the class data: ");
+        System.out.println("Enter the name of a subject in order to print the subject's information: ");
         String name = scanner.nextLine();
         scanner = new Scanner(System.in);
         System.out.println("Details of subject: " + university.showSubject(name));
@@ -78,7 +104,12 @@ public class Main {
         scanner = new Scanner(System.in);
 
         university.enrollStudent(subjectName, name, age, id);
-        System.out.println(university.showSubject(subjectName));
+        StringBuilder subjectInfo = university.showSubject(subjectName);
+        if (subjectInfo != null) {
+            System.out.println(subjectInfo);
+        } else {
+            System.out.println("Subject not found or student not enrolled.");
+        }
     }
 
     public static void addSubject() {
@@ -101,7 +132,7 @@ public class Main {
         System.out.println("New class added successfully: \n" + university.createSubject(name, classroom, id, teacherName));
     }
 
-    public static void listClassesOfStudent(){
+    public static void listClassesOfStudent() {
         System.out.println("Enter the ID of the student: ");
         long id = scanner.nextLong();
         scanner = new Scanner(System.in);
